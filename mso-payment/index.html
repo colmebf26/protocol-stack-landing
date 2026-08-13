@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Black Forest MSO — Payment Structure</title>
+  <meta name="description" content="Proposed entity and payment flow for Black Forest MSO, telehealth, and pharmacy." />
+  <style>
+    :root{--bg:#07110d;--panel:#0c1b15;--panel2:#10231b;--line:#244235;--text:#f2f8f4;--muted:#a9b8b0;--accent:#9be15d;--accent2:#d5ffac;--warn:#ffd37a;}
+    *{box-sizing:border-box} body{margin:0;background:radial-gradient(1100px 600px at 85% -10%,#163a29 0%,transparent 60%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
+    .wrap{max-width:1120px;margin:0 auto;padding:56px 24px 80px}.eyebrow{color:var(--accent);font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.hero{padding:28px 0 36px;border-bottom:1px solid var(--line)}h1{font-size:clamp(40px,7vw,74px);line-height:.98;margin:12px 0 18px;letter-spacing:-.05em;max-width:900px}.sub{max-width:760px;color:var(--muted);font-size:18px}.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#0b1712;color:#cfe0d7;font-size:13px;margin-top:18px}.dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+    .grid{display:grid;gap:18px}.three{grid-template-columns:repeat(3,1fr)}.two{grid-template-columns:1.15fr .85fr}.section{padding:42px 0 0}.section h2{font-size:30px;letter-spacing:-.03em;margin:0 0 8px}.section p.lead{color:var(--muted);margin:0 0 20px}.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 12px 30px rgba(0,0,0,.14)}.card h3{margin:0 0 6px;font-size:19px}.card p{margin:0;color:var(--muted)}.amt{font-size:44px;font-weight:800;letter-spacing:-.05em;margin:18px 0 2px}.label{font-size:13px;color:var(--muted)}.accent{color:var(--accent2)}
+    .flow{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap;margin-top:18px}.node{flex:1 1 190px;min-height:145px;border:1px solid var(--line);border-radius:18px;background:#0b1712;padding:18px}.node small{display:block;color:var(--accent);font-weight:700;margin-bottom:8px}.arrow{display:flex;align-items:center;justify-content:center;color:#668274;font-size:24px;min-width:24px}.stripe{border-top:3px solid #635bff}
+    .table{width:100%;border-collapse:collapse;margin-top:14px}.table th,.table td{text-align:left;padding:14px 12px;border-bottom:1px solid var(--line)}.table th{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#8fa59a}.table td:last-child,.table th:last-child{text-align:right}.good{color:var(--accent2);font-weight:700}.bad{color:#ff9f9f;font-weight:700}.note{margin-top:18px;padding:16px 18px;border-radius:16px;border:1px solid #5d4f2d;background:#1a160d;color:#e9d8a8;font-size:14px}.check{display:flex;gap:12px;margin:12px 0;color:#d8e6df}.check span:first-child{color:var(--accent);font-weight:900}.footer{margin-top:46px;padding-top:22px;border-top:1px solid var(--line);color:#7f968b;font-size:13px}.treasury{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;background:#07100c;border:1px solid var(--line);border-radius:18px;padding:20px;color:#dff1e7;line-height:1.65}
+    @media(max-width:800px){.three,.two{grid-template-columns:1fr}.arrow{transform:rotate(90deg);min-height:24px}.wrap{padding-top:34px}.amt{font-size:38px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Black Forest MSO, Inc.</div>
+      <h1>Entity & payment structure</h1>
+      <p class="sub">A proposed structure that keeps the MSO, physician-owned telehealth entity, and licensed pharmacy operationally distinct while preserving a single Black Forest customer experience.</p>
+      <div class="pill"><span class="dot"></span> Proposed planning model · August 2026</div>
+    </section>
+
+    <section class="section">
+      <h2>1. Entity structure</h2>
+      <p class="lead">The MSO controls non-clinical infrastructure. Clinical and dispensing decisions stay with the licensed entities.</p>
+      <div class="flow">
+        <div class="node"><small>NON-CLINICAL</small><strong>Black Forest MSO, Inc.</strong><p>Brand, domain, software, marketing, support, billing infrastructure, admin operations.</p></div>
+        <div class="arrow">→</div>
+        <div class="node"><small>CLINICAL</small><strong>Physician-Owned Telehealth PC</strong><p>Clinical evaluation, diagnosis, prescribing and medical decision-making.</p></div>
+        <div class="arrow">→</div>
+        <div class="node"><small>DISPENSING</small><strong>Licensed 503A Pharmacy</strong><p>Prescription validation, compounding, dispensing and shipment.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>2. $199 patient payment</h2>
+      <p class="lead">Proposed economic allocation for one completed order.</p>
+      <div class="grid three">
+        <div class="card"><h3>Telehealth PC</h3><div class="amt">$10</div><div class="label">Medical / clinical fee</div><p style="margin-top:12px">Charged through the telehealth entity's own Stripe account and deposited to its bank account.</p></div>
+        <div class="card"><h3>Pharmacy / RX</h3><div class="amt">$19</div><div class="label">Prescription / dispensing component</div><p style="margin-top:12px">Charged through the pharmacy's own Stripe account and deposited to the pharmacy.</p></div>
+        <div class="card"><h3>Black Forest MSO</h3><div class="amt accent">$170</div><div class="label">Non-clinical platform / admin component</div><p style="margin-top:12px">Only to the extent supported by bona fide non-clinical services and approved by healthcare counsel.</p></div>
+      </div>
+      <div class="note"><strong>Important:</strong> The $170 MSO component should be documented as payment for legitimate non-clinical services—not compensation for referrals, prescribing, or dispensing. State fee-splitting and corporate-practice rules should be reviewed before launch.</div>
+    </section>
+
+    <section class="section">
+      <h2>3. Stripe architecture</h2>
+      <p class="lead">Three legal entities, three merchant accounts, three matching bank accounts.</p>
+      <div class="grid three">
+        <div class="card stripe"><h3>Stripe #1 — MSO</h3><p><strong>Merchant:</strong> Black Forest MSO, Inc.</p><p><strong>Receives:</strong> $170 proposed MSO component</p><p><strong>Deposit:</strong> MSO bank account</p></div>
+        <div class="card stripe"><h3>Stripe #2 — Telehealth</h3><p><strong>Merchant:</strong> Physician-owned PC</p><p><strong>Receives:</strong> $10 clinical fee</p><p><strong>Deposit:</strong> PC bank account</p></div>
+        <div class="card stripe"><h3>Stripe #3 — Pharmacy</h3><p><strong>Merchant:</strong> Licensed pharmacy</p><p><strong>Receives:</strong> $19 RX/dispensing fee</p><p><strong>Deposit:</strong> Pharmacy bank account</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>4. Customer experience</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>One Black Forest checkout</h3>
+          <p>The customer can remain inside one branded flow while the backend creates entity-specific charges. The payment method can be tokenized so the customer does not need to manually enter the card multiple times.</p>
+        </div>
+        <div class="card">
+          <h3>Keep these aligned</h3>
+          <div class="check"><span>✓</span><span>Entity named in patient disclosures</span></div>
+          <div class="check"><span>✓</span><span>Stripe merchant account</span></div>
+          <div class="check"><span>✓</span><span>Bank account receiving funds</span></div>
+          <div class="check"><span>✓</span><span>Refund / chargeback responsibility</span></div>
+          <div class="check"><span>✓</span><span>Books and revenue recognition</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>5. Centralized banking / treasury</h2>
+      <p class="lead">If California PC, New York PC, and other required state professional entities are genuinely separate legal entities with different EINs, each should generally have its own account — but they can all be managed inside one bank and one treasury portal.</p>
+      <div class="treasury">ONE BANK
+ONE TREASURY LOGIN
+
+├── Hub PC account
+├── CA PC account
+├── NY PC account
+├── TX entity account
+├── NJ entity account
+└── other required professional entities
+
+            ↓ automatic sweep
+
+      CENTRAL TREASURY ACCOUNT</div>
+      <div class="note"><strong>Operationally:</strong> this can feel like one account while preserving legal separation. Banks support multi-entity treasury structures, zero-balance accounts, cash concentration and automated sweeps. Intercompany transfers should be properly recorded on each entity's books.</div>
+    </section>
+
+    <section class="section">
+      <h2>6. Recommended operating rules</h2>
+      <table class="table">
+        <thead><tr><th>Do</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Use separate Stripe accounts and bank accounts for MSO, telehealth and pharmacy</td><td class="good">Recommended</td></tr>
+          <tr><td>Keep medical decisions exclusively with the physician-owned clinical entity</td><td class="good">Required conceptually</td></tr>
+          <tr><td>Keep dispensing decisions with the licensed pharmacy</td><td class="good">Required conceptually</td></tr>
+          <tr><td>Use one bank / treasury portal to manage multiple required professional-entity accounts</td><td class="good">Operationally efficient</td></tr>
+          <tr><td>Have the MSO collect all $199 as its own medical/RX revenue, then pay the doctor and pharmacy</td><td class="bad">Avoid unless counsel approves</td></tr>
+          <tr><td>Tie MSO compensation directly to referrals, prescriptions or dispensing volume</td><td class="bad">Avoid</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="footer">Planning document only. This page is not legal advice and should be reviewed by healthcare regulatory counsel before implementation.</div>
+  </main>
+</body>
+</html>
